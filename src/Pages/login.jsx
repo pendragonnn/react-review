@@ -5,14 +5,9 @@ import { Link } from 'react-router-dom'
 
 export default function LoginPage() {
   return (
-    <AuthLayouts title={'login'}>
+    <AuthLayouts title={'login'} type="login">
       <FormLogin/>
-      <p className='text-sm mt-5 text-center'>
-        Don't have an account? {" "}
-        <Link to="/register" className='font-bold text-blue-600'>
-          Register
-        </Link>
-      </p>
+      
     </AuthLayouts>
   )
 }

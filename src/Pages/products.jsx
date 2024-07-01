@@ -1,6 +1,7 @@
 import React from 'react'
 import FirstComponentButton from '../components/Elements/Buttons/FirstComponentButton'
 import CardProduct from '../components/Fragments/CardProduct'
+import Counter from '../components/Fragments/Counter'
 
 const products = [
   {
@@ -49,6 +50,9 @@ export default function ProductsPage() {
             <CardProduct.Footer price={product.price} />
           </CardProduct>
         ))}
+      </div>
+      <div className='flex w-100 justify-center'>
+        <Counter />
       </div>
     </>
   )

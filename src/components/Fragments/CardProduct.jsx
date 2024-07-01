@@ -3,7 +3,7 @@ import FirstComponentButton from '../Elements/Buttons/FirstComponentButton'
 
 export default function CardProduct({ children }) {
   return (
-    <div className='w-ull max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow'>
+    <div className='w-ull max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow flex flex-col justify-between mx-5'>
       {children}
     </div>
   )
@@ -19,7 +19,7 @@ const Header = ({ image }) => {
 
 const Body = ({children, title}) => {
   return (
-    <div className='px-5 pb-5'>
+    <div className='px-5 pb-5 h-full'>
       <a href="">
         <h5 className='text-xl font-semibold tracking-high text-white'>{title}</h5>
         <p className='text-m text-white'>

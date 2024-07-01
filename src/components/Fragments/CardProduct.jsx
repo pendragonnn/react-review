@@ -3,7 +3,7 @@ import FirstComponentButton from '../Elements/Buttons/FirstComponentButton'
 
 export default function CardProduct({ children }) {
   return (
-    <div className='w-ull max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow flex flex-col justify-between mx-5'>
+    <div className='w-ull max-w-xs bg-gray-800 border border-gray-700 rounded-lg shadow flex flex-col justify-between mx-5 my-2'>
       {children}
     </div>
   )
@@ -30,13 +30,13 @@ const Body = ({children, title}) => {
   )
 }
 
-const Footer = ({ price }) => {
+const Footer = ({ price, handleAddToCart, id }) => {
   return (
     <div className='flex items-center justify-between px-5 pb-5'>
       <span className='text-xl font-bold text-white'>
-        {price}
+        Rp {price.toLocaleString('id-ID', {styles: 'currency', currency: 'IDR'})}
       </span>
-      <FirstComponentButton classname='bg-blue-600' text='Add to cart' />
+      <FirstComponentButton classname='bg-blue-600' text='Add to cart' onClick={() => handleAddToCart(id)} />
     </div>
   )
 }

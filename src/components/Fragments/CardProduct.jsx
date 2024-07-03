@@ -1,5 +1,6 @@
 import React from 'react'
 import FirstComponentButton from '../Elements/Buttons/FirstComponentButton'
+import { Link } from 'react-router-dom'
 
 export default function CardProduct({ children }) {
   return (
@@ -9,11 +10,11 @@ export default function CardProduct({ children }) {
   )
 }
 
-const Header = ({ image }) => {
+const Header = ({ image,id }) => {
   return (
-    <a href="">
+    <Link to={`/product/${id}`}>
       <img src={image} alt="product" className='p-8 rounded-t-lg h-60 w-full object-cover' />
-    </a>
+    </Link>
   )
 }
 

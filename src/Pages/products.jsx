@@ -99,9 +99,9 @@ export default function ProductsPage() {
           </table>
         </div>
       </div>
-      {/* <div className='flex w-100 justify-center'>
+      <div className='flex w-100 justify-center'>
         <Counter />
-      </div> */}
+      </div>
     </>
   )
 }

@@ -3,6 +3,7 @@ import FirstComponentButton from '../components/Elements/Buttons/FirstComponentB
 import CardProduct from '../components/Fragments/CardProduct'
 import Counter from '../components/Fragments/Counter'
 import { getProducts } from '../services/product.service'
+import { getUsername } from '../services/auth.service'
 
 // const products = [
 //   {
@@ -28,12 +29,11 @@ import { getProducts } from '../services/product.service'
 //   },
 // ]
 
-const email = localStorage.getItem('email')
-
 export default function ProductsPage() {
   const [cart, setCart] = useState([])
   const [totalPrice, setTotalPrice] = useState(0)
   const [products, setProducts] = useState([])
+  const [username, setUsername] = useState("")
   
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem("cart")) || [])
@@ -56,10 +56,18 @@ export default function ProductsPage() {
     }
   }, [cart, products])
 
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if(token) {
+      setUsername(getUsername(token))
+    } else {
+      window.location.href = '/login'
+    }
+  })
+
 
   const handleLogout = () => {
-    localStorage.removeItem('email')
-    localStorage.removeItem('password')
+    localStorage.removeItem('token')
     window.location.href = '/login'
   }
 
@@ -95,7 +103,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <div className='flex justify-end h-20 bg-blue-600 text-white items-center px-10'>{email}
+      <div className='flex justify-end h-20 bg-blue-600 text-white items-center px-10'>{username}
         <FirstComponentButton classname='ml-5 bg-black' text='Logout' onClick={handleLogout} />
       </div>
       <div className='flex justify-center py-5'>

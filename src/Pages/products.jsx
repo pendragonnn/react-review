@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FirstComponentButton from '../components/Elements/Buttons/FirstComponentButton'
 import CardProduct from '../components/Fragments/CardProduct'
 import Counter from '../components/Fragments/Counter'
@@ -30,12 +30,24 @@ const products = [
 const email = localStorage.getItem('email')
 
 export default function ProductsPage() {
-  const [cart, setCart] = useState([
-    {
-      id: 1,
-      qty: 1,
-    },
-  ])
+  const [cart, setCart] = useState([])
+  const [totalPrice, setTotalPrice] = useState(0)
+  
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem("cart")) || [])
+  }, [])
+
+  useEffect(() => {
+    if(cart.length > 0) {
+      const sum = cart.reduce((acc, item) => {
+        const product = products.find((product) => product.id === item.id)
+        return acc + product.price * item.qty
+      }, 0)
+      setTotalPrice(sum)
+      localStorage.setItem("cart", JSON.stringify(cart))
+    }
+  }, [cart])
+
 
   const handleLogout = () => {
     localStorage.removeItem('email')
@@ -95,13 +107,17 @@ export default function ProductsPage() {
                 )
 
               })}
+              <tr  className='font-bold'>
+                <td colSpan={3}>Total Price</td>
+                <td>Rp {totalPrice.toLocaleString('id-ID', {styles: 'currency', currency: 'IDR'})}</td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div className='flex w-100 justify-center'>
+      {/* <div className='flex w-100 justify-center'>
         <Counter />
-      </div>
+      </div> */}
     </>
   )
 }

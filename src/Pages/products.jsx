@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import FirstComponentButton from '../components/Elements/Buttons/FirstComponentButton'
 import CardProduct from '../components/Fragments/CardProduct'
 import Counter from '../components/Fragments/Counter'
@@ -7,6 +7,7 @@ import { getUsername } from '../services/auth.service'
 import { useLogin } from '../hooks/useLogin'
 import TableCart from '../components/Fragments/TableCart'
 import Navbar from '../components/Layouts/Navbar'
+import { DarkMode } from '../context/DarkMode'
 
 // const products = [
 //   {
@@ -36,6 +37,7 @@ export default function ProductsPage() {
   // const [cart, setCart] = useState([])
   // const [totalPrice, setTotalPrice] = useState(0)
   const [products, setProducts] = useState([])
+  const { isDarkMode, setIsDarkMode } = useContext(DarkMode)
   useLogin()
   
   // useEffect(() => {
@@ -90,7 +92,7 @@ export default function ProductsPage() {
   return (
     <>
       <Navbar />
-      <div className='flex justify-center py-5'>
+      <div className={`flex justify-center py-5 ${isDarkMode && "bg-slate-900" }`}>
         <div className="w-4/6 flex flex-wrap">
           {products.length > 0 && products.map((product) => (
             <CardProduct key={product.id}>
